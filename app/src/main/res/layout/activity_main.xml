@@ -15,7 +15,7 @@
         android:layout_marginTop="12dp"
         android:text="Йошкар-Ола, Россия"
         android:textColor="@color/text_secondary"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
         android:fontFamily="sans-serif-medium"
         android:text="👋 Добрый вечер!"
         android:textColor="@color/text_default"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="7dp"
-            android:text="Воскресенье 25 мая | 09:25 "
+            android:text="Воскресенье 25 мая | 09:25"
             android:textColor="@color/text_secondary"
             android:textSize="16sp" />
 
