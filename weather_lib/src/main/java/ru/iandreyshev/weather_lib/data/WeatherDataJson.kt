@@ -1,4 +1,4 @@
-package ru.iandreyshev.workshopweatherapp.data
+package ru.iandreyshev.weather_lib.data
 
 import com.google.gson.annotations.SerializedName
 

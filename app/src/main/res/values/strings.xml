@@ -1,11 +1,3 @@
 <resources>
     <string name="app_name">WorkshopWeatherApp</string>
-
-    <string name="title_morning">👋 Доброе утро!</string>
-    <string name="title_day">👋 Добный день!</string>
-    <string name="title_evening">👋 Добрый вечер!</string>
-
-    <string name="day_temperature_template">Днем {temp}</string>
-    <string name="night_temperature_template">Ночью {temp}</string>
-
 </resources>

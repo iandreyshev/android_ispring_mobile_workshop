@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "WorkshopWeatherApp"
 include(":app")
- 
+include(":weather_lib")

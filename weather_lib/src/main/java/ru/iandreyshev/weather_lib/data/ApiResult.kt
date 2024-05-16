@@ -1,4 +1,4 @@
-package ru.iandreyshev.workshopweatherapp.data
+package ru.iandreyshev.weather_lib.data
 
 sealed interface ApiResult<out T> {
     class Success<T>(val data: T) : ApiResult<T>

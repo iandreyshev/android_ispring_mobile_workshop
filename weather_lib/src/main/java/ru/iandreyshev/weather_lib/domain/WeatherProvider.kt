@@ -1,4 +1,4 @@
-package ru.iandreyshev.workshopweatherapp.domain
+package ru.iandreyshev.weather_lib.domain
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import ru.iandreyshev.workshopweatherapp.data.ApiResult
-import ru.iandreyshev.workshopweatherapp.data.WeatherGateway
+import ru.iandreyshev.weather_lib.data.ApiResult
+import ru.iandreyshev.weather_lib.data.WeatherGateway
 
 class WeatherProvider(
     private val gateway: WeatherGateway,

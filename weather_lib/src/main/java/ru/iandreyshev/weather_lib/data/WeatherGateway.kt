@@ -1,11 +1,11 @@
-package ru.iandreyshev.workshopweatherapp.data
+package ru.iandreyshev.weather_lib.data
 
 import com.androidnetworking.AndroidNetworking
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import ru.iandreyshev.workshopweatherapp.domain.Location
-import ru.iandreyshev.workshopweatherapp.domain.NetworkStateProvider
+import ru.iandreyshev.weather_lib.domain.Location
+import ru.iandreyshev.weather_lib.domain.NetworkStateProvider
 
 class WeatherGateway(
     private val networkStateProvider: NetworkStateProvider

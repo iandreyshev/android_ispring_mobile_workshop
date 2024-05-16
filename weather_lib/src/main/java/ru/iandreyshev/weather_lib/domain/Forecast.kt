@@ -1,4 +1,4 @@
-package ru.iandreyshev.workshopweatherapp.domain
+package ru.iandreyshev.weather_lib.domain
 
 data class Forecast(
     val title: String,

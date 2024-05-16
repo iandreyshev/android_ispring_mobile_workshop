@@ -1,9 +1,8 @@
-package ru.iandreyshev.workshopweatherapp.ui
+package ru.iandreyshev.workshopweatherapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ru.iandreyshev.workshopweatherapp.R
-import ru.iandreyshev.workshopweatherapp.di.getWeatherViewModel
+import ru.iandreyshev.weather_lib.domain.Weather
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,10 +11,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mViewModel.weatherData.observe(this, ::renderWeather)
+    }
 
-        mViewModel.weatherData.observe(this) { weather ->
-            println(weather)
-        }
+    private fun renderWeather(weather: Weather) {
+        println(weather)
     }
 
 }
