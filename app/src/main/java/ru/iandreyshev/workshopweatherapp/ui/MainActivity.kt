@@ -1,7 +1,8 @@
-package ru.iandreyshev.workshopweatherapp
+package ru.iandreyshev.workshopweatherapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import ru.iandreyshev.workshopweatherapp.R
 
 class MainActivity : AppCompatActivity() {
 
