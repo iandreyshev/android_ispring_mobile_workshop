@@ -30,8 +30,12 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    implementation("com.amitshekhar.android:android-networking:1.0.2")
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
 }
