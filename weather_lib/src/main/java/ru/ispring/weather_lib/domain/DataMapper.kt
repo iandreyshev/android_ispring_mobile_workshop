@@ -28,7 +28,7 @@ class DataMapper(private val context: Context) {
 
         return Weather(
             location = location.title,
-            title = title,
+            titleText = title,
             temperature = "${json.data.weatherByPoint.weatherNow.temperature}°C",
             precipitation = json.data.weatherByPoint.weatherNow.condition.mapCondition(),
             date = mapDateTimeFull(currentDate),

@@ -19,9 +19,9 @@ class WeatherViewModel(
     private val mWeatherData = MutableLiveData<Weather>()
 
     init {
-        weatherProvider.getWeather().onEach {
-            mWeatherData.value = it
-        }.launchIn(viewModelScope)
+        weatherProvider.getWeather()
+            .onEach { mWeatherData.value = it }
+            .launchIn(viewModelScope)
     }
 
 }
