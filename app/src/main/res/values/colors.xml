@@ -3,5 +3,4 @@
     <color name="text_default">#FFF</color>
     <color name="text_secondary">#99FFFFFF</color>
     <color name="text_decorative">#CCFFFFFF</color>
-    <color name="divider">#14FFFFFF</color>
 </resources>
