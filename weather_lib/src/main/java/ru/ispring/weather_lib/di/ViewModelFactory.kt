@@ -1,4 +1,4 @@
-package ru.iandreyshev.weather_lib.di
+package ru.ispring.weather_lib.di
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel

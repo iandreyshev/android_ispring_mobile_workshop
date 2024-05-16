@@ -1,10 +1,10 @@
-package ru.iandreyshev.weather_lib.domain
+package ru.ispring.weather_lib.domain
 
 import android.content.Context
-import ru.iandreyshev.weather_lib.R
-import ru.iandreyshev.weather_lib.data.DayForecastJson
-import ru.iandreyshev.weather_lib.data.ResponseJson
-import ru.iandreyshev.weather_lib.data.WeatherConditionJson
+import ru.ispring.weather_lib.R
+import ru.ispring.weather_lib.data.DayForecastJson
+import ru.ispring.weather_lib.data.ResponseJson
+import ru.ispring.weather_lib.data.WeatherConditionJson
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle

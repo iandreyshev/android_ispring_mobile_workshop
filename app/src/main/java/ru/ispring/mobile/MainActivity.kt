@@ -1,8 +1,8 @@
-package ru.iandreyshev.workshopweatherapp
+package ru.ispring.mobile
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ru.iandreyshev.weather_lib.domain.Weather
+import ru.ispring.weather_lib.domain.Weather
 
 class MainActivity : AppCompatActivity() {
 

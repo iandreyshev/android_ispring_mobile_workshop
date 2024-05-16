@@ -1,4 +1,4 @@
-package ru.iandreyshev.weather_lib.domain
+package ru.ispring.weather_lib.domain
 
 data class Weather(
     val location: String, // Йошкар-Ола, Россия

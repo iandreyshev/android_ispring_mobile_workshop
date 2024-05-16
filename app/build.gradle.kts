@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ru.iandreyshev.workshopweatherapp"
+    namespace = "ru.ispring.mobile"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ru.iandreyshev.workshopweatherapp"
+        applicationId = "ru.ispring.mobile"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

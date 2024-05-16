@@ -1,4 +1,4 @@
-package ru.iandreyshev.weather_lib.domain
+package ru.ispring.weather_lib.domain
 
 data class Location(
     val title: String,

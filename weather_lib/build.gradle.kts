@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.iandreyshev.weather_lib"
+    namespace = "ru.ispring.weather_lib"
     compileSdk = 34
 
     defaultConfig {
