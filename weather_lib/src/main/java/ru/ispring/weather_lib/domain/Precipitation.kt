@@ -1,11 +1,13 @@
 package ru.ispring.weather_lib.domain
 
 enum class Precipitation {
-    RAIN,
-    THUNDERSTORM,
-    HAIL,
-    CLOUDY,
-    SUNNY,
-    CLOUDY_AND_SUNNY,
-    SNOW
+    RAIN, // ДОЖДЬ
+    THUNDERSTORM, // ГРОЗА
+    HAIL, // ГРАД
+    CLOUDY, // СИЛЬНАЯ ОБЛАЧНОСТЬ
+    SUNNY, // ЯСНО
+    CLOUDY_AND_SUNNY, // ОБЛАЧНО
+    SNOW // СНЕГ
 }
+
+
