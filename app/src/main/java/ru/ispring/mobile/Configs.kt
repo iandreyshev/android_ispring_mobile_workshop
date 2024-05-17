@@ -12,17 +12,16 @@ import ru.ispring.weather_lib.domain.Forecast
 import ru.ispring.weather_lib.domain.LocationProvider
 import ru.ispring.weather_lib.domain.NetworkStateProvider
 import ru.ispring.weather_lib.domain.Precipitation
-import ru.ispring.weather_lib.domain.WeatherProvider
-import ru.ispring.weather_lib.presentation.WeatherViewModel
+import ru.ispring.weather_lib.domain.WeatherProviderImpl
+import ru.ispring.weather_lib.presentation.WeatherProvider
 
 fun MainActivity.getWeatherViewModel() = lazy {
     getViewModel {
-        WeatherViewModel(
-            weatherProvider = WeatherProvider(
+        WeatherProvider(
+            weatherProvider = WeatherProviderImpl(
                 gateway = WeatherGateway(
                     networkStateProvider = NetworkStateProvider(this)
                 ),
-                locationProvider = LocationProvider(),
                 dataMapper = DataMapper(this)
             )
         )

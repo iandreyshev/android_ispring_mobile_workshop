@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface IWeatherProvider {
     fun getWeather(): Flow<Weather>
-    fun addLocation(location: Location)
+    fun addLocations(vararg location: Location)
     fun nextLocation()
 }
