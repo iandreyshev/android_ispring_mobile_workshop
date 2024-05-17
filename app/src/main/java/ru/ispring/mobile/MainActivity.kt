@@ -8,7 +8,7 @@ import ru.ispring.weather_lib.domain.Weather
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by getWeatherViewModel()
-    private val binding by viewBindings(ActivityMainBinding::bind)
+    private val screen by viewBindings(ActivityMainBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
