@@ -16,13 +16,13 @@ data class Weather(
 
     val precText: String
         get() = when (precipitation) {
-            Precipitation.RAIN -> "Дождь"
-            Precipitation.THUNDERSTORM -> "Гроза"
-            Precipitation.HAIL -> "Град"
-            Precipitation.CLOUDY -> "Пасмурно"
-            Precipitation.SUNNY -> "Ясно"
-            Precipitation.CLOUDY_AND_SUNNY -> "Облачно"
-            Precipitation.SNOW -> "Снег"
+            Precipitation.RAIN -> "ДОЖДЬ"
+            Precipitation.THUNDERSTORM -> "ГРОЗА"
+            Precipitation.HAIL -> "ГРАД"
+            Precipitation.CLOUDY -> "ПАСМУРНО"
+            Precipitation.SUNNY -> "ЯСНО"
+            Precipitation.CLOUDY_AND_SUNNY -> "ОБЛАЧНО"
+            Precipitation.SNOW -> "СНЕГ"
         }
 
 }
