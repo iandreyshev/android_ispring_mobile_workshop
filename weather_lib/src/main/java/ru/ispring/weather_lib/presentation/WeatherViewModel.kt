@@ -10,7 +10,7 @@ import ru.ispring.weather_lib.domain.Location
 import ru.ispring.weather_lib.domain.Weather
 import ru.ispring.weather_lib.domain.WeatherProviderImpl
 
-class WeatherProvider(
+class WeatherViewModel(
     private val weatherProvider: WeatherProviderImpl
 ) : ViewModel() {
 
