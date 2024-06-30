@@ -3,104 +3,53 @@ package ru.ispring.weather_lib.data
 import com.google.gson.annotations.SerializedName
 
 data class ResponseJson(
-    @SerializedName("data")
-    val data: WeatherDataJson
-)
-
-data class WeatherDataJson(
-    @SerializedName("weatherByPoint")
-    val weatherByPoint: WeatherByPointJson
-)
-
-data class WeatherByPointJson(
-    @SerializedName("now")
-    val weatherNow: WeatherNowJson,
+    @SerializedName("current")
+    val current: CurrentWeatherJson,
     @SerializedName("forecast")
     val forecast: ForecastJson
 )
 
-data class WeatherNowJson(
-    @SerializedName("temperature")
-    val temperature: Int,
+data class CurrentWeatherJson(
+    @SerializedName("temp_c")
+    val temperature: Double,
     @SerializedName("condition")
-    val condition: WeatherConditionJson
+    val condition: ConditionJson
+)
+
+data class ConditionJson(
+    @SerializedName("code")
+    val code: Int
 )
 
 data class ForecastJson(
-    @SerializedName("days")
-    val days: List<DayForecastJson>
+    @SerializedName("forecastday")
+    val forecastDay: List<ForecastDayJson>
 )
 
-data class DayForecastJson(
-    @SerializedName("sunriseTime")
-    val sunriseTime: String,
-    @SerializedName("sunsetTime")
-    val sunsetTime: String,
-    @SerializedName("summary")
-    val summary: DayForecastSummaryJson
-)
-
-data class DayForecastSummaryJson(
+data class ForecastDayJson(
     @SerializedName("day")
-    val day: DayForecastDayNightJson,
-    @SerializedName("night")
-    val night: DayForecastDayNightJson
+    val day: DayJson,
+    @SerializedName("astro")
+    val astronomy: AstronomyJson,
+    @SerializedName("hour")
+    val hour: List<HourJson>
 )
 
-data class DayForecastDayNightJson(
-    @SerializedName("avgTemperature")
-    val avgTemperature: Int,
+data class DayJson(
     @SerializedName("condition")
-    val condition: WeatherConditionJson
+    val condition: ConditionJson,
 )
 
-enum class WeatherConditionJson {
-    @SerializedName("CLEAR")
-    CLEAR,
+data class AstronomyJson(
+    @SerializedName("sunrise")
+    val sunrise: String,
+    @SerializedName("sunset")
+    val sunset: String
+)
 
-    @SerializedName("PARTLY_CLOUDY")
-    PARTLY_CLOUDY,
-
-    @SerializedName("CLOUDY")
-    CLOUDY,
-
-    @SerializedName("OVERCAST")
-    OVERCAST,
-
-    @SerializedName("LIGHT_RAIN")
-    LIGHT_RAIN,
-
-    @SerializedName("RAIN")
-    RAIN,
-
-    @SerializedName("HEAVY_RAIN")
-    HEAVY_RAIN,
-
-    @SerializedName("SHOWERS")
-    SHOWERS,
-
-    @SerializedName("SLEET")
-    SLEET,
-
-    @SerializedName("LIGHT_SNOW")
-    LIGHT_SNOW,
-
-    @SerializedName("SNOW")
-    SNOW,
-
-    @SerializedName("SNOWFALL")
-    SNOWFALL,
-
-    @SerializedName("HAIL")
-    HAIL,
-
-    @SerializedName("THUNDERSTORM")
-    THUNDERSTORM,
-
-    @SerializedName("THUNDERSTORM_WITH_RAIN")
-    THUNDERSTORM_WITH_RAIN,
-
-    @SerializedName("THUNDERSTORM_WITH_HAIL")
-    THUNDERSTORM_WITH_HAIL
-
-}
+data class HourJson(
+    @SerializedName("temp_c")
+    val temperature: Double,
+    @SerializedName("is_day")
+    val isDay: Int
+)

@@ -1,8 +1,8 @@
 package ru.ispring.weather_lib.data
 
 sealed interface ApiResult<out T> {
-    class Success<T>(val data: T) : ApiResult<T>
-    class Error(val errorType: ErrorType) : ApiResult<Nothing>
+    data class Success<T>(val data: T) : ApiResult<T>
+    data class Error(val errorType: ErrorType) : ApiResult<Nothing>
 }
 
 sealed interface ErrorType {
