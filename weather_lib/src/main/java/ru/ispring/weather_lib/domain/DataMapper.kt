@@ -74,7 +74,7 @@ class DataMapper(private val context: Context) {
 
         1273, 1276, 1279, 1282, 1087 -> Precipitation.THUNDERSTORM
 
-        else -> Precipitation.SUNNY
+        else -> Precipitation.CLOUDY
     }
 
     private fun mapForecast(
