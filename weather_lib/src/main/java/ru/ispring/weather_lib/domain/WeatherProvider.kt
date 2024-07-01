@@ -11,9 +11,9 @@ import ru.ispring.weather_lib.data.ApiResult
 import ru.ispring.weather_lib.data.WeatherGateway
 
 class WeatherProvider(
-    private val gateway: WeatherGateway,
-    private val locationProvider: LocationProvider,
-    private val dataMapper: DataMapper
+        private val gateway: WeatherGateway,
+        private val locationProvider: LocationProvider,
+        private val dataMapper: DataMapper
 ) : IWeatherProvider {
 
     private var mCachedWeather: Weather? = null
@@ -29,7 +29,9 @@ class WeatherProvider(
 
             when (val result = gateway.getWeatherData(location)) {
                 is ApiResult.Success -> {
-                    mCachedWeather = dataMapper.mapWeather(location, result.data)
+                    mCachedWeather = runCatching {
+                        dataMapper.mapWeather(location, result.data)
+                    }.getOrNull()
                 }
 
                 else -> Unit

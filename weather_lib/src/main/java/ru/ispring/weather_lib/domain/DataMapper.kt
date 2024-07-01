@@ -28,39 +28,109 @@ class DataMapper(private val context: Context) {
         val dayAfterTomorrowForecast = json.forecast.forecastDay[2]
 
         return Weather(
-            location = location.title,
-            title = title,
-            temperature = "${json.current.temperature.roundToInt()}°C",
-            precipitation = json.current.condition.code.toPrecipitation(),
-            date = mapDateTimeFull(currentDate),
-            sunrise = mapTime(todayForecast.astronomy.sunrise),
-            sunset = mapTime(todayForecast.astronomy.sunset),
-            forecastDay1 = mapForecast(
-                json = tomorrowForecast,
-                date = currentDate.plusDays(1),
-                isDay = true
-            ),
-            forecastNight1 = mapForecast(
-                json = tomorrowForecast,
-                date = currentDate.plusDays(1),
-                isDay = false
-            ),
-            forecastDay2 = mapForecast(
-                json = dayAfterTomorrowForecast,
-                date = currentDate.plusDays(2),
-                isDay = true
-            ),
-            forecastNight2 = mapForecast(
-                json = dayAfterTomorrowForecast,
-                date = currentDate.plusDays(2),
-                isDay = false
-            )
+                location = location.title,
+                title = title,
+                temperature = "${json.current.temperature.roundToInt()}°C",
+                precipitation = json.current.condition.code
+                        .toPrecipitation(isDay = json.current.isDay == 1),
+                date = mapDateTimeFull(currentDate),
+                sunrise = mapTime(todayForecast.astronomy.sunrise),
+                sunset = mapTime(todayForecast.astronomy.sunset),
+                forecastDay1 = mapForecast(
+                        json = tomorrowForecast,
+                        date = currentDate.plusDays(1),
+                        isDay = true
+                ),
+                forecastNight1 = mapForecast(
+                        json = tomorrowForecast,
+                        date = currentDate.plusDays(1),
+                        isDay = false
+                ),
+                forecastDay2 = mapForecast(
+                        json = dayAfterTomorrowForecast,
+                        date = currentDate.plusDays(2),
+                        isDay = true
+                ),
+                forecastNight2 = mapForecast(
+                        json = dayAfterTomorrowForecast,
+                        date = currentDate.plusDays(2),
+                        isDay = false
+                )
         )
     }
 
-    private fun Int.toPrecipitation(): Precipitation = when (this) {
-        1000 -> Precipitation.SUNNY
+    private fun mapForecast(
+            json: ForecastDayJson,
+            date: ZonedDateTime,
+            isDay: Boolean
+    ): Forecast {
+        val dayHours = json.hour.filter { it.isDay == 1 }
+        val nightHours = json.hour.filter { it.isDay == 0 }
+
+        return Forecast(
+                title = mapDateTimeShort(date),
+                precipitation = when {
+                    isDay -> json.day.condition.code.toPrecipitation(isDay = true)
+                    else -> nightHours.groupBy { it.condition.code }
+                            .maxOf { it.value.size }
+                            .toPrecipitation(isDay = false)
+                },
+                info = run {
+                    val dayAvgTemp = dayHours.let { list ->
+                        (list.sumOf { it.temperature } / list.size).roundToInt()
+                    }
+                    val nightAvgTemp = nightHours.let { list ->
+                        (list.sumOf { it.temperature } / list.size).roundToInt()
+                    }
+
+                    when {
+                        isDay -> dayAvgTemp to R.string.day_temperature_template
+                        else -> nightAvgTemp to R.string.night_temperature_template
+                    }.let { (temp, strRes) ->
+                        context.getString(strRes).replace("{temp}", "$temp°C")
+                    }
+                }
+        )
+    }
+
+    private fun mapDateTimeFull(dateTime: ZonedDateTime): String {
+        val dayOfWeek = dateTime.dayOfWeek
+                .getDisplayName(TextStyle.FULL, Locale.getDefault())
+                .replaceFirstChar { it.uppercase() }
+
+        val date = dateTime.format(DateTimeFormatter.ofPattern("dd MMM", Locale.getDefault()))
+        val time = mapTime(dateTime)
+
+        return "$dayOfWeek $date | $time"
+    }
+
+    private fun mapDateTimeShort(dateTime: ZonedDateTime): String {
+        val dayOfWeek = dateTime.dayOfWeek
+                .getDisplayName(TextStyle.SHORT, Locale.getDefault())
+                .replaceFirstChar { it.uppercase() }
+
+        val date = dateTime.format(DateTimeFormatter.ofPattern("dd MMM", Locale.getDefault()))
+
+        return "$dayOfWeek $date"
+    }
+
+    private fun mapTime(strTime: String): String {
+        val time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mm a"))
+        return time.toString()
+    }
+
+    private fun mapTime(date: ZonedDateTime) =
+            "${date.hour.toString().padStart(2, '0')}:${date.minute.toString().padStart(2, '0')}"
+
+    @Suppress("MagicNumber")
+    private fun Int.toPrecipitation(isDay: Boolean): Precipitation = when (this) {
+        1000 -> when {
+            isDay -> Precipitation.SUNNY
+            else -> Precipitation.CLOUDY
+        }
+
         1003 -> Precipitation.CLOUDY_AND_SUNNY
+
         1006 -> Precipitation.CLOUDY
 
         1072, 1168, 1171, 1198, 1201 -> Precipitation.HAIL
@@ -76,58 +146,5 @@ class DataMapper(private val context: Context) {
 
         else -> Precipitation.CLOUDY
     }
-
-    private fun mapForecast(
-        json: ForecastDayJson,
-        date: ZonedDateTime,
-        isDay: Boolean
-    ) = Forecast(
-        title = mapDateTimeShort(date),
-        precipitation = json.day.condition.code.toPrecipitation(),
-        info = run {
-            val dayAvgTemp = json.hour.filter { it.isDay == 1 }.let { list ->
-                (list.sumOf { it.temperature } / list.size).roundToInt()
-            }
-            val nightAvgTemp = json.hour.filter { it.isDay == 0 }.let { list ->
-                (list.sumOf { it.temperature } / list.size).roundToInt()
-            }
-
-            when {
-                isDay -> dayAvgTemp to R.string.day_temperature_template
-                else -> nightAvgTemp to R.string.night_temperature_template
-            }.let { (temp, strRes) ->
-                context.getString(strRes).replace("{temp}", "$temp°C")
-            }
-        }
-    )
-
-    private fun mapDateTimeFull(dateTime: ZonedDateTime): String {
-        val dayOfWeek = dateTime.dayOfWeek
-            .getDisplayName(TextStyle.FULL, Locale.getDefault())
-            .replaceFirstChar { it.uppercase() }
-
-        val date = dateTime.format(DateTimeFormatter.ofPattern("dd MMM", Locale.getDefault()))
-        val time = mapTime(dateTime)
-
-        return "$dayOfWeek $date | $time"
-    }
-
-    private fun mapDateTimeShort(dateTime: ZonedDateTime): String {
-        val dayOfWeek = dateTime.dayOfWeek
-            .getDisplayName(TextStyle.SHORT, Locale.getDefault())
-            .replaceFirstChar { it.uppercase() }
-
-        val date = dateTime.format(DateTimeFormatter.ofPattern("dd MMM", Locale.getDefault()))
-
-        return "$dayOfWeek $date"
-    }
-
-    private fun mapTime(strTime: String): String {
-        val time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mm a"))
-        return time.toString()
-    }
-
-    private fun mapTime(date: ZonedDateTime) =
-        "${date.hour.toString().padStart(2, '0')}:${date.minute.toString().padStart(2, '0')}"
 
 }
